@@ -4,8 +4,8 @@
   "description": "get stuff done",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js",
-    "bundle": "webpack"
+    "start": "electron ./main.js",
+    "build": "webpack"
   },
   "author": "",
   "license": "ISC",

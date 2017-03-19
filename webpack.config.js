@@ -11,7 +11,7 @@ const jsConfig = {
   context: __dirname,
   entry: path.resolve('app','app.js'),
   output: {
-    path: 'assets',
+    path: 'build',
     filename: 'bundle.js'
   },
   module: {
@@ -33,7 +33,7 @@ const cssConfig = {
   context: __dirname,
   entry: path.resolve('stylesheets', 'application.scss'),
   output: {
-    path: 'assets',
+    path: 'build',
     filename: 'application.css'
   },
   module: {
