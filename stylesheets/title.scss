@@ -1,0 +1,23 @@
+#title {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+
+  background-color: lighten($background,5);
+  color: $primary;
+  font-weight: bold;
+
+  @include flex-center;
+  div {
+    @include flex-center;
+  }
+  #settings-button {
+    cursor: pointer;
+    -webkit-app-region: no-drag;
+    svg {
+      fill: lighten($background, 20);
+      &:hover {
+        fill: $primary;
+      }
+    }
+  }
+}

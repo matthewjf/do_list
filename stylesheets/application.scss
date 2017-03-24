@@ -1,3 +1,37 @@
-#root {
-  background-color: red;
+@import './roboto';
+@import './colors';
+
+$background: #1E2224;
+$primary: #03A9F4;
+
+@mixin noscroll {
+  overflow: hidden;
 }
+
+@mixin flex-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body {
+  @include noscroll;
+  font-family: 'roboto';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  margin: 0;
+  font-size: 16px;
+  color: white;
+}
+
+#app {
+  @include noscroll;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+@import './title';
+@import './list';
