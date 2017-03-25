@@ -1,0 +1,14 @@
+#new-task {
+  padding: 0.5rem;
+  form {
+    display: flex;
+  }
+  input, select {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0 0.25rem;
+  }
+  #new-task-description {
+    flex-basis: 100%;
+  }
+}

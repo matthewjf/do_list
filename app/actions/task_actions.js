@@ -1,6 +1,7 @@
 export const ADD_TASK = `ADD_TASK`
 export const COMPLETE_TASK = `COMPLETE_TASK`
 export const UPDATE_TASK = `UPDATE_TASK`
+export const REMOVE_ALL_TASKS = `REMOVE_ALL_TASKS`
 
 // description, project(optional), priority(optional)
 
@@ -30,3 +31,5 @@ export const updateTask = (id, task) => {
     task: task
   }
 }
+
+export const removeAllTasks = () => ({type: REMOVE_ALL_TASKS})

@@ -1,6 +1,12 @@
-import { ADD_TASK, COMPLETE_TASK, UPDATE_TASK } from '../actions/task_actions'
+import {
+  ADD_TASK,
+  COMPLETE_TASK,
+  UPDATE_TASK,
+  REMOVE_ALL_TASKS
+} from '../actions/task_actions'
 
 const defaultState = {_idx: 0, list: {}}
+
 const TaskReducer = (state=defaultState, action) => {
   switch (action.type) {
     case ADD_TASK:
@@ -22,6 +28,8 @@ const TaskReducer = (state=defaultState, action) => {
       newTask.id = action.id
       newList[action.id] = newTask
       return {_idx: newIdx, list: newList}
+    case REMOVE_ALL_TASKS:
+      return {_idx: 0, list: {}}
     default:
       return state;
   }

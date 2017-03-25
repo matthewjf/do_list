@@ -2,45 +2,45 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { createStore } from 'redux'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import middleware from './middleware/middleware'
+import key from 'keymaster'
 
 import rootReducer from './reducers/root_reducer'
 
 import Title from './components/title'
 import Settings from './components/settings'
 import List from './components/list'
-import Add from './components/add'
+import NewTask from './components/new_task'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.openSettings = this.openSettings.bind(this)
-    this.closeSettings = this.closeSettings.bind(this)
+  componentDidMount() {
+    key.filter = (event) => true
+    key.setScope('list')
 
-    this.state = {showSettings: false}
-  }
-
-  openSettings() {
-    this.setState({showSettings: true})
-  }
-
-  closeSettings() {
-    this.setState({showSettings: false})
+    let {shortcuts} = this.props
+    Object.keys(shortcuts).forEach((cmd) => {
+      let sc = shortcuts[cmd]
+      key(sc.shortcut, sc.scope, () => {
+        window.dispatchEvent(new Event(cmd))
+      })
+    })
   }
 
   render() {
     return (
       <div id='app'>
-        <Title openSettings={this.openSettings} />
-        <Settings show={this.state.showSettings} close={this.closeSettings}/>
+        <Title />
+        <Settings />
         <List />
-        <Add />
+        <NewTask />
       </div>
     )
   }
 }
 
+var ConnectedApp = connect(state => ({shortcuts: state.shortcuts}))(App)
+
 export const store = createStore(rootReducer, JSON.parse(localStorage.getItem('dolist')) || {}, middleware)
 
-render(<Provider store={store}><App/></Provider>, document.getElementById('root'))
+render(<Provider store={store}><ConnectedApp/></Provider>, document.getElementById('root'))
