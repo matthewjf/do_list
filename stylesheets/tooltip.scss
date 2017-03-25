@@ -1,0 +1,23 @@
+.tip {
+  position: relative;
+
+  &:hover::before {
+    height: auto;
+    padding: 0.5rem;
+    transition: all 0.5s ease;
+  }
+
+  &::before {
+    height: 0;
+    padding: 0 0.5rem;
+    content: attr(data-tip);
+    font-size: 12px;
+    background-color: black;
+    position: absolute;
+    border-radius: 2px;
+    white-space: nowrap;
+    top: 1.3rem;
+    color: white;
+    overflow-y: hidden;
+  }
+}

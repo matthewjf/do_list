@@ -26,6 +26,10 @@ body {
   color: white;
 }
 
+*:focus {
+  outline: none;
+}
+
 #app {
   @include noscroll;
   display: flex;
@@ -33,5 +37,16 @@ body {
   flex-direction: column;
 }
 
+.hidden {
+  display: none;
+}
+
+@import './transitions';
+
+@import './buttons';
+@import './forms';
+@import './tooltip';
+
 @import './title';
+@import './settings';
 @import './list';

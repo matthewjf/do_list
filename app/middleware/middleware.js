@@ -2,7 +2,7 @@ import { applyMiddleware } from 'redux'
 
 const storageMiddleware = store => next => action => {
   let result = next(action)
-  localStorage.setItem('getdone', JSON.stringify(store.getState()))
+  localStorage.setItem('dolist', JSON.stringify(store.getState()))
   return result
 }
 

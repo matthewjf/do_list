@@ -1,5 +1,5 @@
 {
-  "name": "get_done",
+  "name": "do_list",
   "version": "1.0.0",
   "description": "get stuff done",
   "main": "main.js",
@@ -21,6 +21,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
+    "react-select": "^1.0.0-rc.3",
     "redux": "^3.6.0"
   },
   "devDependencies": {

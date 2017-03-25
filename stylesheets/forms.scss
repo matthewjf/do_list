@@ -1,0 +1,26 @@
+input, select {
+  border: none;
+  border-radius: 2px;
+  padding: 0.5rem;
+  font-size: 14px;
+  color: white;
+  background-color: lighten($background, 10%);
+  &:focus {
+    background-color: lighten($background, 15%);
+  }
+}
+
+select {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-padding-end: 0.5rem;
+  -moz-padding-end: 0.5rem;
+  -webkit-padding-start: 0.5rem;
+  -moz-padding-start: 0.5rem;
+
+  -webkit-border-radius: 2px;
+  padding-top: 0.5rem;
+  padding-bottom:0.5rem;
+}

@@ -3,7 +3,7 @@ import { UPDATE_GROUP } from '../actions/settings_actions'
 const defaultState = {
   groupType: 'project',
   requireProject: false,
-  requirePriority: false,
+  requirePriority: false
 }
 
 const SettingsReducer = (state=defaultState, action) => {

@@ -10,7 +10,10 @@
   div {
     @include flex-center;
   }
+
   #settings-button {
+    @include transition(all);
+    
     cursor: pointer;
     -webkit-app-region: no-drag;
     svg {
@@ -18,6 +21,9 @@
       &:hover {
         fill: $primary;
       }
+    }
+    &::before {
+      right: 0;
     }
   }
 }
