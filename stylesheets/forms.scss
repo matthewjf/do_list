@@ -3,6 +3,7 @@ form {
 }
 
 input, select {
+  margin: 0.25rem 0 0.25rem 0.5rem;
   border: none;
   border-radius: 2px;
   padding: 0.5rem;
@@ -11,6 +12,10 @@ input, select {
   background-color: lighten($background, 10%);
   &:focus {
     background-color: lighten($background, 15%);
+  }
+  &:disabled {
+    background-color: $background;
+    color: map-get($colors, gray-6);
   }
 }
 

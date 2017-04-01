@@ -57,7 +57,7 @@ class Settings extends Component {
             <TaskSettings />
           </div>
           <div id='settings-footer'>
-            <button onClick={this.removeAllTasks} className='red'>delete all tasks</button>
+            <button onClick={this.removeAllTasks} className='red'>clear tasks</button>
             <button onClick={this.closeSettings}>close</button>
           </div>
         </div>

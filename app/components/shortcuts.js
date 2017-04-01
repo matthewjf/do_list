@@ -4,19 +4,36 @@ import key from 'keymaster'
 import { codesToShortcut } from '../util/keycodes'
 
 class Shortcuts extends Component {
+  constructor(props) {
+    super(props)
+    this.renderShortcuts = this.renderShortcuts.bind(this)
+  }
+
   handleShortcutChange(e) {
     e.preventDefault()
     e.stopPropagation()
     e.target.value = codesToShortcut(key.getPressedKeyCodes())
   }
 
-  renderShortcut(label, command) {
+  toReadable(camel) {
+    return camel.replace(/([A-Z])/g, ' $1').toLowerCase()
+  }
+
+  renderShortcuts() {
+    let {shortcuts} = this.props
+    return Object.keys(shortcuts).map((name, idx) => {
+      return this.renderShortcut(this.toReadable(name), name, idx)
+    })
+  }
+
+  renderShortcut(label, command, idx) {
     return (
-      <label>
+      <label key={idx}>
         {label}
         <input onKeyDown={this.handleShortcutChange}
                type='text'
-               defaultValue={this.props.shortcuts[command].shortcut}/>
+               defaultValue={this.props.shortcuts[command].shortcut}
+               disabled={true} />
       </label>
     )
   }
@@ -25,7 +42,7 @@ class Shortcuts extends Component {
     return (
       <div id='shortcuts'>
         <h3>SHORTCUTS</h3>
-        {this.renderShortcut('new task', 'newTask')}
+        {this.renderShortcuts()}
       </div>
     )
   }

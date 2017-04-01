@@ -5,6 +5,11 @@
   width: 80vw;
   display: flex;
   flex-direction: column;
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 #settings-body {
@@ -16,7 +21,7 @@
   justify-content: space-between;
 }
 
-#task-settings {
+#task-settings, #shortcuts {
   display: flex;
   flex-direction: column;
 }
