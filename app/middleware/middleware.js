@@ -16,6 +16,7 @@ const shortcutMiddleware = store => next => action => {
       key.unbind(oldState.shortcuts[command])
       key(action.data.shortcut, action.data.scope, () => {
         window.dispatchEvent(new Event(action.data.command))
+        return false
       })
     }
   }

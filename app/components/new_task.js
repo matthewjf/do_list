@@ -9,6 +9,7 @@ class NewTask extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.isValid = this.isValid.bind(this)
     this.resetForm = this.resetForm.bind(this)
+    this.exitTask = this.exitTask.bind(this)
   }
 
   componentDidMount() {
@@ -17,14 +18,16 @@ class NewTask extends Component {
       key.setScope('task')
     })
 
-    window.addEventListener('exitTask', () => {
-      this.resetForm()
-      this.refs.description.blur()
-      this.refs.project.blur()
-      this.refs.priority.blur()
+    window.addEventListener('exitTask', this.exitTask)
+  }
 
-      key.setScope('list')
-    })
+  exitTask() {
+    this.resetForm()
+    this.refs.description.blur()
+    this.refs.project.blur()
+    this.refs.priority.blur()
+    window.focus()
+    key.setScope('list')
   }
 
   handleSubmit(e) {
@@ -36,7 +39,7 @@ class NewTask extends Component {
       this.refs.priority.value
     ))
 
-    this.resetForm()
+    this.exitTask()
   }
 
   isValid() {
@@ -54,7 +57,7 @@ class NewTask extends Component {
   }
 
   render() {
-    let {shortcuts} = this.props
+    let { shortcuts } = this.props
     return (
       <div id='new-task'>
         <form onSubmit={this.handleSubmit}>

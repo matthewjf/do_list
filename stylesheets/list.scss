@@ -3,3 +3,36 @@
   flex: 1;
   overflow: auto;
 }
+
+.grouping {
+  border-radius: 4px;
+  border: 1px solid lighten($background,10%);
+  position: relative;
+  margin-top: 1.5rem;
+  padding: 1rem 0.5rem;
+}
+
+.group-header {
+  position: absolute;
+  display: inline;
+  background-color: $background;
+  margin: 0;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  top: -1rem;
+  left: 0.5rem;
+  padding: 0 0.25rem;
+}
+
+.task {
+  margin: 0.25rem 0;
+}
+
+.priority, .project {
+  display: inline-block;
+  padding: 0 0.25rem;
+  text-align: center;
+  margin: 0 0.25rem;
+  border-radius: 2px;
+  text-transform: lowercase;
+}

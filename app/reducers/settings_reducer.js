@@ -1,4 +1,4 @@
-import { UPDATE_GROUP } from '../actions/settings_actions'
+import { UPDATE_SETTING } from '../actions/settings_actions'
 
 const defaultState = {
   groupType: 'project',
@@ -8,8 +8,8 @@ const defaultState = {
 
 const SettingsReducer = (state=defaultState, action) => {
   switch (action.type) {
-    case UPDATE_GROUP:
-      return Object.assign({}, state, {groupType: action.groupType})
+    case UPDATE_SETTING:
+      return Object.assign({}, state, {[action.setting]: action.value})
     default:
       return state;
   }

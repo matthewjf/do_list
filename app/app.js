@@ -1,4 +1,3 @@
-'use strict'
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { createStore } from 'redux'
@@ -15,14 +14,15 @@ import NewTask from './components/new_task'
 
 class App extends Component {
   componentDidMount() {
-    key.filter = (event) => true
+    key.filter = () => true
     key.setScope('list')
 
-    let {shortcuts} = this.props
+    var {shortcuts} = store.getState()
     Object.keys(shortcuts).forEach((cmd) => {
       let sc = shortcuts[cmd]
       key(sc.shortcut, sc.scope, () => {
         window.dispatchEvent(new Event(cmd))
+        return false
       })
     })
   }
@@ -39,8 +39,6 @@ class App extends Component {
   }
 }
 
-var ConnectedApp = connect(state => ({shortcuts: state.shortcuts}))(App)
-
 export const store = createStore(rootReducer, JSON.parse(localStorage.getItem('dolist')) || {}, middleware)
 
-render(<Provider store={store}><ConnectedApp/></Provider>, document.getElementById('root'))
+render(<Provider store={store}><App/></Provider>, document.getElementById('root'))

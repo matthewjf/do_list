@@ -4,6 +4,9 @@ import { showSettings } from '../actions/settings_actions'
 import { removeAllTasks } from '../actions/task_actions'
 import Modal from './modal'
 import key from 'keymaster'
+import Shortcuts from './shortcuts'
+import TaskSettings from './task_settings'
+import { updateSetting } from '../actions/settings_actions'
 
 class Settings extends Component {
   constructor(props) {
@@ -11,18 +14,25 @@ class Settings extends Component {
     this.closeSettings = this.closeSettings.bind(this)
     this.removeAllTasks = this.removeAllTasks.bind(this)
 
-    this.state = {show: false}
+    this.state = {
+      show: false
+    }
   }
 
   componentDidMount() {
     window.addEventListener('showSettings',() => {
-      key.setScope('settings')
       this.setState({show: true})
+      key.setScope('settings')
     })
 
     window.addEventListener('closeSettings',() => {
-      key.setScope('list')
       this.setState({show: false})
+      key.setScope('list')
+    })
+
+    window.addEventListener('toggleGroupType', () => {
+      let newType = this.props.settings.groupType === 'project' ? 'priority' : 'project'
+      this.props.dispatch(updateSetting('groupType', newType))
     })
   }
 
@@ -32,7 +42,6 @@ class Settings extends Component {
   }
 
   closeSettings(e) {
-    e.preventDefault()
     if (e.currentTarget === e.target) {
       key.setScope('list')
       this.setState({show: false})
@@ -41,10 +50,11 @@ class Settings extends Component {
 
   render() {
     return (
-      <Modal close={this.closeSettings} show={this.state.show}>
+      <Modal show={this.state.show} close={this.closeSettings}>
         <div id='settings'>
           <div id='settings-body'>
-            <h3>Shortcuts</h3>
+            <Shortcuts />
+            <TaskSettings />
           </div>
           <div id='settings-footer'>
             <button onClick={this.removeAllTasks} className='red'>delete all tasks</button>

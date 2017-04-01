@@ -10,8 +10,8 @@ export const addTask = (description, project, priority) => {
     type: ADD_TASK,
     task: {
       description: description,
-      project: project,
-      priority: priority,
+      project: (project || 'none').toUpperCase(),
+      priority: (priority || 'none'),
       completedAt: null
     }
   }

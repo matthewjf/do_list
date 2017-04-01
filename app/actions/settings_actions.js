@@ -1,8 +1,9 @@
-export const UPDATE_GROUP = `UPDATE_GROUP`
+export const UPDATE_SETTING = `UPDATE_SETTING`
 
-export const updateGroupBy = (groupType) => {
+export const updateSetting = (setting, value) => {
   return {
-    type: UPDATE_GROUP,
-    groupType: groupType
+    type: UPDATE_SETTING,
+    setting: setting,
+    value: value
   }
 }
