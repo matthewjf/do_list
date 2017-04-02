@@ -37,8 +37,15 @@ class Settings extends Component {
   }
 
   removeAllTasks() {
-    if (window.confirm('are you sure?'))
+    if (window.confirm('Are you sure you want to delete all tasks?'))
       this.props.dispatch(removeAllTasks())
+  }
+
+  resetAll() {
+    if (window.confirm('Are you sure you want to reset everything?')) {
+      localStorage.removeItem('dolist')
+      location.reload(true)
+    }
   }
 
   closeSettings(e) {
@@ -58,6 +65,7 @@ class Settings extends Component {
           </div>
           <div id='settings-footer'>
             <button onClick={this.removeAllTasks} className='red'>clear tasks</button>
+            <button onClick={this.resetAll} className='red'>reset all</button>
             <button onClick={this.closeSettings}>close</button>
           </div>
         </div>

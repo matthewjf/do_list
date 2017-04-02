@@ -7,9 +7,14 @@ class NewTask extends Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.isValid = this.isValid.bind(this)
+    this.validate = this.validate.bind(this)
     this.resetForm = this.resetForm.bind(this)
     this.exitTask = this.exitTask.bind(this)
+    this.onBlur = this.onBlur.bind(this)
+
+    this.state = {
+      errors: {}
+    }
   }
 
   componentDidMount() {
@@ -31,7 +36,9 @@ class NewTask extends Component {
   }
 
   handleSubmit(e) {
+
     e.preventDefault()
+    if (!this.validate()) return
 
     this.props.dispatch(addTask(
       this.refs.description.value,
@@ -42,30 +49,59 @@ class NewTask extends Component {
     this.exitTask()
   }
 
-  isValid() {
+  validate() {
+    let { requireProject, requirePriority } = this.props.settings
+    let { description, project, priority } = this.refs
+    let newState = {errors: {}}
 
+    if (!description.value) newState.errors.description = true
+    if (requireProject && !project.value) newState.errors.project = true
+    if (requirePriority && priority.value === 'none') newState.errors.priority = true
+
+    if (Object.keys(newState.errors).length) {
+      this.setState(newState)
+      return false
+    } else {
+      return true
+    }
   }
 
   resetForm() {
     this.refs.description.value = ''
     this.refs.project.value = ''
     this.refs.priority.value = 'none'
+    this.setState({errors: {}})
   }
 
   priorityOptions() {
     return ['none', 'crit', 'high', 'med', 'low'].map(p => ({value: p, label: p}))
   }
 
+  getClass(name) {
+    return this.state.errors[name] ? 'error' : ''
+  }
+
+  onBlur() {
+    this.setState({errors: {}})
+  }
+
   render() {
     let { shortcuts } = this.props
     return (
       <div id='new-task'>
-        <form onSubmit={this.handleSubmit}>
-          <input ref='description' id='new-task-description' type='text' placeholder={`new task (${shortcuts.newTask.shortcut})`}></input>
+        <form onSubmit={this.handleSubmit} onBlur={this.onBlur}>
+          <input ref='description'
+                 id='new-task-description'
+                 type='text'
+                 placeholder={`new task (${shortcuts.newTask.shortcut})`}
+                 className={this.getClass('description')} />
 
-          <input ref='project' type='text' placeholder='project'></input>
+          <input ref='project'
+                 type='text'
+                 placeholder='project'
+                 className={this.getClass('project')} />
 
-          <select name="priority" ref='priority'>
+          <select name="priority" ref='priority' className={this.getClass('priority')}>
             {this.priorityOptions().map(opt =>
               <option value={opt.value} key={opt.value}>{opt.label}</option>
             )}

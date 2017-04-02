@@ -34,3 +34,7 @@ $colors: (
     border-color: $value;
   }
 }
+
+@function colors($color){
+  @return map-get($colors, $color)
+}
