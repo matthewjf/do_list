@@ -13,9 +13,14 @@ export default class Group extends Component {
   sortList() {
     var attr = this.props.groupType === 'project' ? 'priority' : 'project'
     return this.props.list.sort((a,b) => {
-      if(a[attr] < b[attr]) return -1
-      if(a[attr] > b[attr]) return 1
-      return 0
+      if (!!a.completedAt !== !!b.completedAt) {
+        if (a.completedAt) return 1
+        return -1
+      } else {
+        if(a[attr] < b[attr]) return 1
+        if(a[attr] > b[attr]) return -1
+        return 0
+      }
     })
   }
 

@@ -1,6 +1,3 @@
-form {
-
-}
 
 input, select {
   margin: 0.25rem 0 0.25rem 0.5rem;
@@ -37,4 +34,10 @@ select {
 .error {
   position: relative;
   outline: 1px solid colors(red);
+}
+
+.checkbox {
+  cursor: pointer;
+  display: inline-block;
+  height: 24px;
 }

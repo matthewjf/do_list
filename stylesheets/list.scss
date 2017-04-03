@@ -26,6 +26,29 @@
 
 .task {
   margin: 0.25rem 0;
+  display: flex;
+  &.completed {
+    .priority, .project, .description {
+      text-decoration: line-through;
+    }
+    .priority, .project {
+      color: #757575;
+      background-color: #333;
+    }
+  }
+  .edit {
+    margin-left: auto;
+    &:hover > * {
+      fill: colors(yellow);
+    }
+  }
+  .delete:hover > * {
+    fill: colors(red);
+  }
+  .delete, .edit{
+    cursor: pointer;
+    height: 24px;
+  }
 }
 
 .priority, .project {
