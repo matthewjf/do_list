@@ -1,5 +1,7 @@
 #new-task {
   display: inline-table;
+  width: 100%;
+  box-sizing: border-box;
   padding: 0.5rem;
   form {
     display: flex;

@@ -20,6 +20,10 @@ input[type='number'] {
   width: 48px;
 }
 
+input[type='submit'] {
+  display: none;
+}
+
 select {
   -webkit-appearance: button;
   -moz-appearance: button;

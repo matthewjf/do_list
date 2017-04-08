@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron ./main.js",
-    "build": "webpack --watch"
+    "build": "webpack --watch",
+    "release": "NODE_ENV=production webpack && electron-packager . --overwrite --out release"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "css-loader": "^0.27.3",
     "extract-text-webpack-plugin": "^2.1.0",
     "node-sass": "^4.5.0",
+    "optimize-css-assets-webpack-plugin": "^1.3.0",
     "sass-loader": "^6.0.3",
     "webpack": "^2.2.1"
   }

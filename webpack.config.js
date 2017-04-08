@@ -1,10 +1,12 @@
 var webpack = require('webpack')
 var path = require('path')
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-const jsCompress = new webpack.optimize.UglifyJsPlugin({
-  compress: { warning: true }
-})
+const jsCompress = new webpack.optimize.UglifyJsPlugin()
+
+var plugins = []
+if (process.env.NODE_ENV === 'production') plugins.push(jsCompress)
 
 const jsConfig = {
   name: 'js',
@@ -14,6 +16,7 @@ const jsConfig = {
     path: 'build',
     filename: 'bundle.js'
   },
+  plugins: plugins,
   module: {
     loaders: [
       {
@@ -27,6 +30,9 @@ const jsConfig = {
     ]
   }
 }
+
+var cssPlugins = [new ExtractTextPlugin('application.css')]
+if (process.env.NODE_ENV === 'production') cssPlugins.push(new OptimizeCssAssetsPlugin())
 
 const cssConfig = {
   name: 'css',
@@ -44,9 +50,7 @@ const cssConfig = {
       }
     ]
   },
-  plugins: [
-    new ExtractTextPlugin('application.css')
-  ]
+  plugins: cssPlugins
 }
 
 module.exports = [jsConfig, cssConfig]

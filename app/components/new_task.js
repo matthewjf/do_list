@@ -12,6 +12,7 @@ class NewTask extends Component {
     this.resetForm = this.resetForm.bind(this)
     this.exitTask = this.exitTask.bind(this)
     this.onBlur = this.onBlur.bind(this)
+    this.onFocus = this.onFocus.bind(this)
     this.handleChange = this.handleChange.bind(this)
 
     this.state = Object.assign({}, this.emptyState(), props)
@@ -29,7 +30,6 @@ class NewTask extends Component {
   componentDidMount() {
     window.addEventListener('newTask', () => {
       this.refs.description.focus()
-      key.setScope('task')
     })
 
     window.addEventListener('exitTask', this.exitTask)
@@ -110,14 +110,22 @@ class NewTask extends Component {
   }
 
   onBlur() {
-    this.setState({errors: {}})
+    this.blur = setTimeout(() => {
+      key.setScope('list')
+      this.setState({errors: {}})
+    }, 200)
+  }
+
+  onFocus() {
+    clearTimeout(this.blur)
+    if (!this.props.id) key.setScope('task')
   }
 
   render() {
     let { shortcuts } = this.props
     return (
       <div id='new-task'>
-        <form onSubmit={this.handleSubmit} onBlur={this.onBlur}>
+        <form onSubmit={this.handleSubmit} onBlur={this.onBlur} onFocus={this.onFocus}>
           <input ref='description'
                  name='description'
                  id='new-task-description'
