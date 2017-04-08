@@ -41,11 +41,13 @@ export default class Group extends Component {
   }
 
   render() {
-    return (
-      <div className='grouping'>
-        <h1 className={this.headerClass()}>{this.props.group}</h1>
-        {this.renderTasks()}
-      </div>
-    )
+    if (this.props.list.length > 0)
+      return (
+        <div className='grouping'>
+          <h1 className={this.headerClass()}>{this.props.group}</h1>
+          {this.renderTasks()}
+        </div>
+      )
+    else return null
   }
 }

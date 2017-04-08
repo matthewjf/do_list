@@ -16,6 +16,10 @@ input, select {
   }
 }
 
+input[type='number'] {
+  width: 48px;
+}
+
 select {
   -webkit-appearance: button;
   -moz-appearance: button;

@@ -5,6 +5,7 @@ import {
   REMOVE_ALL_TASKS,
   REMOVE_TASK
 } from '../actions/task_actions'
+import { stringNow } from '../util/date'
 
 const defaultState = {_idx: 0, list: {}}
 
@@ -19,7 +20,7 @@ const TaskReducer = (state=defaultState, action) => {
       return {_idx: newIdx, list: newList}
     case COMPLETE_TASK:
       var task = Object.assign({}, state.list[action.id])
-      task.completedAt = Date.now()
+      task.completedAt = stringNow()
       var newList = Object.assign({}, state.list)
       newList[action.id] = task
       return {_idx: state._idx, list: newList}

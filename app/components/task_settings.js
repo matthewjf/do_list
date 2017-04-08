@@ -10,7 +10,8 @@ class TaskSettings extends Component {
     this.state = {
       groupType: props.settings.groupType,
       requireProject: props.settings.requireProject,
-      requirePriority: props.settings.requirePriority
+      requirePriority: props.settings.requirePriority,
+      hideCompletedAfter: props.settings.hideCompletedAfter
     }
   }
 
@@ -18,7 +19,8 @@ class TaskSettings extends Component {
     this.setState({
       groupType: props.settings.groupType,
       requireProject: props.settings.requireProject,
-      requirePriority: props.settings.requirePriority
+      requirePriority: props.settings.requirePriority,
+      hideCompletedAfter: props.settings.hideCompletedAfter
     })
   }
 
@@ -50,6 +52,14 @@ class TaskSettings extends Component {
           <input type="checkbox"
                  name="requirePriority"
                  checked={this.state.requirePriority}
+                 onChange={this.handleChange} />
+        </label>
+
+        <label>
+          hide completed after
+          <input type="number"
+                 name="hideCompletedAfter"
+                 value={this.state.hideCompletedAfter}
                  onChange={this.handleChange} />
         </label>
       </div>

@@ -7,6 +7,7 @@ class List extends Component {
   constructor(props) {
     super(props)
     this.generateGroupList = this.generateGroupList.bind(this)
+    this.shouldShowTask = this.shouldShowTask.bind(this)
     this.renderTasks = this.renderTasks.bind(this)
   }
 
@@ -17,9 +18,15 @@ class List extends Component {
     Object.keys(list).forEach((id) => {
       var group = list[id][groupType] || 'NONE'
       taskGroups[group] = taskGroups[group] || []
-      taskGroups[group].push(list[id])
+      if (this.shouldShowTask(list[id].completedAt))
+        taskGroups[group].push(list[id])
     })
     return taskGroups
+  }
+
+  shouldShowTask(completedAt) {
+    let expirationTime = 1000 * 3600 * 24 * this.props.settings.hideCompletedAfter
+    return !completedAt || (Date.now() - new Date(completedAt) < expirationTime)
   }
 
   renderTasks() {

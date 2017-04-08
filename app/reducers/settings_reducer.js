@@ -3,7 +3,8 @@ import { UPDATE_SETTING } from '../actions/settings_actions'
 const defaultState = {
   groupType: 'project',
   requireProject: false,
-  requirePriority: false
+  requirePriority: false,
+  hideCompletedAfter: 1
 }
 
 const SettingsReducer = (state=defaultState, action) => {
