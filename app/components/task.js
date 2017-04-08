@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import { projectColor, priorityColor } from '../util/generate_colors'
-import Checkbox from './checkbox'
-import {completeTask, updateTask, removeTask} from '../actions/task_actions'
 import { connect } from 'react-redux'
+import { projectColor, priorityColor } from '../util/generate_colors'
+import { completeTask, updateTask, removeTask } from '../actions/task_actions'
+import { showEdit } from '../actions/edit_actions'
+import Checkbox from './checkbox'
 import Trash from '../../assets/trash'
 import Pencil from '../../assets/pencil'
-import EditTask from './edit_task'
 
 class Task extends Component {
   constructor(props) {
@@ -19,8 +19,6 @@ class Task extends Component {
     this.renderCheckbox = this.renderCheckbox.bind(this)
     this.delete = this.delete.bind(this)
     this.edit = this.edit.bind(this)
-    this.closeEdit = this.closeEdit.bind(this)
-    this.renderEdit = this.renderEdit.bind(this)
 
     this.state = {}
   }
@@ -64,16 +62,7 @@ class Task extends Component {
   }
 
   edit() {
-    this.setState({showEdit: true})
-  }
-
-  closeEdit() {
-    this.setState({showEdit: false})
-  }
-
-  renderEdit() {
-    if (this.state.showEdit)
-      return <EditTask close={this.closeEdit} />
+    this.props.dispatch(showEdit(this.props.data.id))
   }
 
   render() {
@@ -85,9 +74,10 @@ class Task extends Component {
         <span className={this.priorityClass()}>{data.priority}</span>
         <span className={this.projectClass()}>{data.project || 'NONE'}</span>
         <span className={this.descriptionClass()}>{data.description}</span>
-        <div className='edit' onClick={this.edit} dangerouslySetInnerHTML={{__html: Pencil}}/>
-        {/* {this.renderEdit()} */}
-        <div className='delete' onClick={this.delete} dangerouslySetInnerHTML={{__html: Trash}}/>
+        <div className='actions'>
+          {!this.isCompleted() && <div className='edit' onClick={this.edit} dangerouslySetInnerHTML={{__html: Pencil}}/>}
+          <div className='delete' onClick={this.delete} dangerouslySetInnerHTML={{__html: Trash}}/>
+        </div>
       </div>
     )
   }

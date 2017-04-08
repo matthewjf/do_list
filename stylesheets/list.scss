@@ -37,7 +37,6 @@
     }
   }
   .edit {
-    margin-left: auto;
     &:hover > * {
       fill: colors(yellow);
     }
@@ -48,6 +47,10 @@
   .delete, .edit{
     cursor: pointer;
     height: 24px;
+  }
+  .actions {
+    display: flex;
+    margin-left: auto;
   }
 }
 

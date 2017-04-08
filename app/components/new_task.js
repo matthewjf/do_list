@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { addTask } from '../actions/task_actions'
+import { addTask, updateTask } from '../actions/task_actions'
+import { hideEdit } from '../actions/edit_actions'
 import { connect } from 'react-redux'
 import key from 'keymaster'
 
@@ -20,7 +21,7 @@ class NewTask extends Component {
     return {
       description: '',
       project: '',
-      priority: '',
+      priority: 'none',
       errors: {}
     }
   }
@@ -32,9 +33,20 @@ class NewTask extends Component {
     })
 
     window.addEventListener('exitTask', this.exitTask)
+    window.addEventListener('exitEdit', this.exitTask)
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.id)
+      this.setState({
+        description: props.description,
+        project: props.project,
+        priority: props.priority
+      })
   }
 
   exitTask() {
+    this.props.dispatch(hideEdit())
     this.resetForm()
     this.refs.description.blur()
     this.refs.project.blur()
@@ -44,15 +56,22 @@ class NewTask extends Component {
   }
 
   handleSubmit(e) {
-
     e.preventDefault()
     if (!this.validate()) return
 
-    this.props.dispatch(addTask(
-      this.state.description,
-      this.state.project,
-      this.state.priority
-    ))
+    if (this.props.id)
+      this.props.dispatch(updateTask(
+        this.props.id,
+        { description: this.state.description,
+          project: this.state.project,
+          priority: this.state.priority }
+      ))
+    else
+      this.props.dispatch(addTask(
+        this.state.description,
+        this.state.project,
+        this.state.priority
+      ))
 
     this.exitTask()
   }

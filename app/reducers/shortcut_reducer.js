@@ -5,7 +5,8 @@ const defaultState = {
   showSettings: {shortcut: '⌘+.', scope: 'list'},
   closeSettings: {shortcut: 'esc', scope: 'settings'},
   exitTask: {shortcut: 'esc', scope: 'task'},
-  toggleGroupType: {shortcut: '⌘+,', scope: 'list'}
+  toggleGroupType: {shortcut: '⌘+,', scope: 'list'},
+  exitEdit: {shortcut: 'esc', scope: 'edit'},
 }
 
 const ShortcutReducer = (state=defaultState, action) => {

@@ -9,6 +9,7 @@ import rootReducer from './reducers/root_reducer'
 
 import Title from './components/title'
 import Settings from './components/settings'
+import EditTask from './components/edit_task'
 import List from './components/list'
 import NewTask from './components/new_task'
 
@@ -32,6 +33,7 @@ class App extends Component {
       <div id='app'>
         <Title />
         <Settings />
+        <EditTask />
         <List />
         <NewTask />
       </div>
