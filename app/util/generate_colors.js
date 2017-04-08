@@ -1,9 +1,9 @@
 export function priorityColor(priority) {
   switch (priority) {
     case 'crit':
-      return 'red';
-    case 'high':
       return 'orange';
+    case 'high':
+      return 'red';
     case 'med':
       return 'blue';
     case 'low':
