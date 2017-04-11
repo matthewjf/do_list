@@ -17,8 +17,8 @@ export default class Group extends Component {
         if (a.completedAt) return 1
         return -1
       } else {
-        if(a[attr] < b[attr]) return 1
-        if(a[attr] > b[attr]) return -1
+        if(a[attr] > b[attr]) return 1
+        if(a[attr] < b[attr]) return -1
         return 0
       }
     })

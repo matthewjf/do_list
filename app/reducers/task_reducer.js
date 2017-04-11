@@ -6,6 +6,7 @@ import {
   REMOVE_TASK
 } from '../actions/task_actions'
 import { stringNow } from '../util/date'
+import { normalizeTask } from '../util/normalize'
 
 const defaultState = {_idx: 0, list: {}}
 
@@ -14,7 +15,7 @@ const TaskReducer = (state=defaultState, action) => {
     case ADD_TASK:
       var newList = Object.assign({}, state.list)
       var newIdx = state._idx + 1
-      var newTask = action.task
+      var newTask = normalizeTask(action.task)
       newTask.id = newIdx
       newList[newIdx] = newTask
       return {_idx: newIdx, list: newList}
@@ -26,7 +27,7 @@ const TaskReducer = (state=defaultState, action) => {
       return {_idx: state._idx, list: newList}
     case UPDATE_TASK:
       var newList = Object.assign({}, state.list)
-      var newTask = action.task
+      var newTask = normalizeTask(action.task)
       newTask.id = action.id
       newList[action.id] = newTask
       return {_idx: state._idx, list: newList}
