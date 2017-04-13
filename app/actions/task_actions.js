@@ -12,7 +12,7 @@ export const addTask = (description, project, priority) => {
     task: {
       description: description,
       project: project,
-      priority: priority
+      priority: priority,
       completedAt: null
     }
   }

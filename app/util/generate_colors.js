@@ -1,15 +1,15 @@
 export function priorityColor(priority) {
   switch (priority) {
     case 'crit':
-      return 'orange';
+      return 'crit';
     case 'high':
-      return 'red';
+      return 'high';
     case 'med':
-      return 'blue';
+      return 'med';
     case 'low':
-      return 'green';
+      return 'low';
     default:
-      return 'gray-8';
+      return 'none';
   }
 }
 
@@ -23,7 +23,6 @@ const COLORS = [
   'teal',
   'lime',
   'red',
-  'green',
   'orange'
 ]
 

@@ -20,7 +20,12 @@ $colors: (
   gray-6: #757575,
   gray-7: #616161,
   gray-8: #424242,
-  gray-9: #212121
+  gray-9: #212121,
+  crit: #FB8C00,
+  high: #E53935,
+  med: #1976D2,
+  low: #00897B,
+  none: #424242
 );
 
 @each $col, $value in $colors {
