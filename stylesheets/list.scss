@@ -1,7 +1,10 @@
 #list {
   padding: 0.5rem;
+  overflow-y: auto;
+  display: flex;
   flex: 1;
-  overflow: auto;
+  height: 0px;
+  flex-direction: column;
 }
 
 .grouping {
