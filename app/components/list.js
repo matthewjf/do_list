@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Group from './group'
 import TaskSettings from './task_settings'
+import { sortByType } from '../util/sort'
 
 class List extends Component {
   constructor(props) {
     super(props)
     this.generateGroupList = this.generateGroupList.bind(this)
     this.shouldShowTask = this.shouldShowTask.bind(this)
-    this.renderTasks = this.renderTasks.bind(this)
+    this.renderGroups = this.renderGroups.bind(this)
   }
 
   generateGroupList() {
@@ -29,10 +30,10 @@ class List extends Component {
     return !completedAt || (Date.now() - new Date(completedAt) < expirationTime)
   }
 
-  renderTasks() {
+  renderGroups() {
     let { groupType } = this.props.settings
     var taskGroups = this.generateGroupList()
-    return Object.keys(taskGroups).sort().map((group) => {
+    return Object.keys(taskGroups).sort(sortByType(groupType)).map((group) => {
       return <Group list={taskGroups[group]} groupType={groupType} group={group} key={group} />
     })
   }
@@ -40,7 +41,7 @@ class List extends Component {
   render() {
     return (
       <div id='list'>
-        {this.renderTasks()}
+        {this.renderGroups()}
       </div>
     )
   }
